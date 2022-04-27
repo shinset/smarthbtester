@@ -57,7 +57,9 @@
   <!-- PREBID CONFIGURATION -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/prebid.js@latest/dist/not-for-prod/prebid.js" async></script>
   <script>
-    var PREBID_TIMEOUT = 8000;
+     var PREBID_TIMEOUT = 8000;
+            var FAILSAFE_TIMEOUT = 5000;
+    
     var adUnits = [{
       code: 'prebid_tag_001',
       mediaTypes: {
@@ -91,6 +93,18 @@
       pbjs.setConfig({
         debug: true,
        });
+      
+      
+               consentManagement: {
+            gdpr: {
+              cmpApi: 'iab',
+              timeout: 8000,
+              defaultGdprScope: true
+            }
+          }
+        });
+      
+      
       pbjs.addAdUnits(adUnits);
       pbjs.requestBids({
         bidsBackHandler: sendAdserverRequest
